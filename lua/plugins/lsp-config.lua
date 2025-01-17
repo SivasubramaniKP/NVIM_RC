@@ -28,7 +28,8 @@ return {
 			})
 
 			-- Clangd setup for C/C++
-			lspconfig.clangd.setup({			
+			lspconfig.clangd.setup({
+        
 				capabilities = capabilities,
 			})
 

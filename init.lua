@@ -26,7 +26,7 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
-
+vim.keymap.set("n", "<C-t>", ":terminal<CR>", { noremap = true, silent = true })
 
 local opts = {}
 
