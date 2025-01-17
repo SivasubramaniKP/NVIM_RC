@@ -10,8 +10,8 @@ return {
 		config = function()
 			require("mason-lspconfig").setup({
 				ensure_installed = {
-					"lua_ls",
-					"clangd",
+					"lua_ls", -- Lua Language Server
+					"clangd", -- C/C++ Language Server
 				},
 			})
 		end,
@@ -21,21 +21,23 @@ return {
 		config = function()
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local lspconfig = require("lspconfig")
-			lspconfig.lua_ls.setup({
-				capabilites = capabilities,
-			})
-        lspconfig.clangd.setup({
-                on_attach = function(client, bufnr)
-                        client.server_capabilities.signatureHelpProvider = false
-                        lspconfig.base.on_attach(client, bufnr)
-                end,
-                capabilities = capabilities,
-        })
 
-			--lspconfig.tsserver.setup({})
+
+			-- Lua Language Server setup
+			lspconfig.lua_ls.setup({
+				capabilities = capabilities,
+			})
+
+			-- Clangd setup for C/C++
+			lspconfig.clangd.setup({			
+				capabilities = capabilities,
+			})
+
+			-- Keymaps for general LSP functionality (if not buffer-specific)
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
 			vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
 			vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
 		end,
 	},
 }
+
